@@ -39,6 +39,8 @@ var promise = channel.request("giveMeSomething")
 ```
 We changed the request/reply api of Backbone.Radio to always return a promise or throw an error, when nothing is returned. So your reply function should return a Promise, otherwise the reply api will wrap it for you.
 
+If there are more than one plugin, which want to reply to one event, the last one registered wins and is the only one replying. 
+
 ## Command/Comply
 
 We decided to strip out the command pattern. It's awesome in a stateful frontend app, but useless in a stateless backend, since you don't have stateful singletons, that need keep track on the state of your app.
