@@ -14,11 +14,11 @@ npm install hapi-intercom
 
 ## Usage
 
-Call 
+With
 ```javascript
 var channel = server.methods.intercom.getChannel()
 ```
-and you get a Channel object, where you can use the publish/subscribe pattern and the request/reply pattern. You can provide a channel name, to seperate the events, otherwise you get the universal channel.
+you get a channel object, where you can use the publish/subscribe pattern and the request/reply pattern. You can provide a channel name, to seperate the events, otherwise you get the universal channel.
 
 ## Publish/Subscribe
 
