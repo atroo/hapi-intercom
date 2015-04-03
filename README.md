@@ -20,13 +20,14 @@ var channel = server.methods.intercom.getChannel()
 ```
 you get a channel object, where you can use the publish/subscribe pattern and the request/reply pattern. You can provide a channel name, to seperate the events, otherwise you get the universal channel.
 
+If the channel does not exist, Backbone.Radio will create it for you, so there is no need to check for existence. Just use getChannel and couple your plugins.
+
 ## Publish/Subscribe
 
 ```javascript
 channel.on("someEvent", doSomething)
 
 channel.trigger("someEvent")
-
 ```
 
 ## Request/Reply
@@ -35,9 +36,8 @@ channel.trigger("someEvent")
 channel.reply("giveMeSomething", returnSomethingAwesome)
 
 var promise = channel.request("giveMeSomething")
-
 ```
-We also changed the request/reply api of Backbone.Radio to always return a promise or throw an error, when nothing is returned. So your reply function should return a Promise, otherwise the reply api will wrap it for you.
+We changed the request/reply api of Backbone.Radio to always return a promise or throw an error, when nothing is returned. So your reply function should return a Promise, otherwise the reply api will wrap it for you.
 
 ## Command/Comply
 
