@@ -1,9 +1,9 @@
 var radio = require("./radio");
 
-exports.register = function (plugin, options, next) {
+exports.register = function (server, options, next) {
 
     //erstma so starten
-    plugin.method("intercom.getChannel", function (channel) {
+    server.method("intercom.getChannel", function (channel) {
         channel = channel || "universal";
         
         return radio.channel(channel);

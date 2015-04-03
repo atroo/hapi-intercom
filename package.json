@@ -12,7 +12,11 @@
     "hapi",
     "channel",
     "messaging",
-    "pattern"
+    "pattern",
+    "publish",
+    "subscribe",
+    "request",
+    "reply"
   ],
   "author": "atroo GbR <info@atroo.de>",
   "license": "ISC",
@@ -21,7 +25,6 @@
     "url": "https://github.com/atroo/hapi-intercom"
   },
   "dependencies": {
-    "backbone-events-standalone": "^0.2.6",
     "underscore": "^1.8.2"
   },
   "devDependencies": {

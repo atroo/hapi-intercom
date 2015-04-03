@@ -43,7 +43,7 @@ describe("hapi intercom publish/subscribe", function () {
                             success: true
                         });
                     });
-                    server.methods.intercom.getChannel("test").trigger("triggerTest");
+                    server.methods.intercom.getChannel("test").emit("triggerTest");
                 }
             }
         });
