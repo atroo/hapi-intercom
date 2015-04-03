@@ -274,6 +274,9 @@ Radio.Requests = {
         if(res instanceof Promise) {
             return res;
         }
+        else if(typeof res == undefined) {
+            throw("You need to return a Promise or a Result");
+        }
         else {
             return Promise.resolve(res);
         }
