@@ -1,0 +1,36 @@
+{
+  "name": "hapi-intercom",
+  "version": "0.1.0",
+  "description": "A hapi module that enables horizontal eventdriven communication between modules",
+  "main": "src/plugin.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "keywords": [
+    "radio",
+    "eventbus",
+    "hapi",
+    "channel",
+    "messaging",
+    "pattern"
+  ],
+  "author": "atroo GbR <info@atroo.de>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atroo/hapi-intercom"
+  },
+  "dependencies": {
+    "backbone-events-standalone": "^0.2.6",
+    "underscore": "^1.8.2"
+  },
+  "devDependencies": {
+    "boom": "^2.6.1",
+    "chai": "^2.1.2",
+    "gulp": "^3.8.11",
+    "gulp-mocha": "^2.0.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-util": "^3.0.4",
+    "hapi": "^8.4.0"
+  }
+}
