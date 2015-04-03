@@ -4,7 +4,7 @@ Hapi is awesome. Period. We use it for all our backend projects and it provides 
 
 Since we really love to encapsulate business logic into plugins, we often have the requirement to couple them to properly use the provided functionality. Hapi offers 2 namespaces for that. The server.methods and the server.plugins namespace, but to offer more flexibility hapi does not make any assumptions on what functions to put there and it's not really event-driven.
 
-So we decided to adopt the good messaging patterns from Backbone.Events and Backbone.Radio and put it in this plugin.
+So we decided to adopt the good messaging patterns from Backbone.Events and Backbone.Radio and put it in this plugin. This covers the event-driven communication between loosely coupled plugins and we consider this as horizontally eventing.
 
 ## Install
 
