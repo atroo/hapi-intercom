@@ -6,8 +6,41 @@ Since we really love to encapsulate business logic into plugins, we often have t
 
 So we decided to adopt the good messaging patterns from Backbone.Events and Backbone.Radio and put it in this plugin.
 
-Call server.methods.intercom.getChannel() and you get a Channel object, where you can use the publish/subscribe pattern and the request/reply pattern.
+## Install
+
+```javascript
+npm install hapi-intercom
+```
+
+## Usage
+
+Call 
+```javascript
+var channel = server.methods.intercom.getChannel()
+```
+and you get a Channel object, where you can use the publish/subscribe pattern and the request/reply pattern. You can provide a channel name, to seperate the events, otherwise you get the universal channel.
+
+## Publish/Subscribe
+
+```javascript
+channel.on("someEvent", doSomething)
+
+channel.trigger("someEvent")
+
+```
+
+## Request/Reply
+
+```javascript
+channel.reply("giveMeSomething", returnSomethingAwesome)
+
+var promise = channel.request("giveMeSomething")
+
+```
+We also changed the request/reply api of Backbone.Radio to always return a promise or throw an error, when nothing is returned. So your reply function should return a Promise, otherwise the reply api will wrap it for you.
+
+## Command/Comply
 
 We decided to strip out the command pattern. It's awesome in a stateful frontend app, but useless in a stateless backend, since you don't have stateful singletons, that need keep track on the state of your app.
 
-We also changed the request/reply api of Backbone.Radio to always return a promise or throw an error, when nothing is returned.
+
