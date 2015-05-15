@@ -27,7 +27,7 @@ If the channel does not exist, Backbone.Radio will create it for you, so there i
 ```javascript
 channel.on("someEvent", doSomething)
 
-channel.trigger("someEvent")
+channel.emit("someEvent")
 ```
 
 ## Request/Reply
