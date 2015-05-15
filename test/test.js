@@ -25,6 +25,10 @@ beforeEach(function (done) {
 
 });
 
+afterEach(function() {
+    server.stop();
+});
+
 describe("hapi intercom publish/subscribe", function () {
 
     it("should register without error", function (done) {
@@ -131,6 +135,32 @@ describe("hapi intercom request/response", function () {
                 expect(res.result).to.be.an.object;
                 expect(res.result.works).to.equal(true);
 
+                done();
+            });
+        });
+    });
+    
+    it("should reply with a rejected promise when no handler is bound", function (done) {
+        server.route({
+            method: 'GET',
+            path: '/1',
+            config: {
+                handler: function (request, reply) {
+                    server.methods.intercom.getChannel("testing").request("testing").then(function (res) {
+                    }).catch(function(err) {
+                        expect(err).to.be.an.instanceof(Error);
+                        
+                        reply(err);
+                    });
+                }
+            }
+        });
+
+        server.start(function (err) {
+            server.inject({
+                method: 'GET',
+                url: '/1'
+            }, function (res) {
                 done();
             });
         });

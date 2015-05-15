@@ -201,6 +201,8 @@ Radio.Requests = {
         
     } else {
       Radio.debugLog('An unhandled request was fired', name, channelName);
+        
+        return Promise.reject(new Error("No reply handler for request "+name+" on channel "+channelName+" found"));
     }
   },
 
