@@ -167,3 +167,38 @@ describe("hapi intercom request/response", function () {
     });
 
 });
+
+describe("hapi intercom command/comply", function () {
+
+    it("should comply to an command", function (done) {
+        server.route({
+            method: 'GET',
+            path: '/1',
+            config: {
+                handler: function (request, reply) {
+                    console.log("START");
+                    server.methods.intercom.getChannel("test").comply("test", function () {
+                        console.log("COMPLY");
+                        reply({
+                            success: true
+                        });
+                    });
+                    server.methods.intercom.getChannel("test").command("test");
+                }
+            }
+        });
+
+        server.start(function (err) {
+            server.inject({
+                method: 'GET',
+                url: '/1'
+            }, function (res) {
+
+                expect(res.result).to.be.an.object;
+                expect(res.result.success).to.equal(true);
+
+                done();
+            });
+        });
+    });
+});
