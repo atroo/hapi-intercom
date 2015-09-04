@@ -18,7 +18,7 @@ With
 ```javascript
 var channel = server.methods.intercom.getChannel()
 ```
-you get a channel object, where you can use the publish/subscribe pattern and the request/reply pattern. You can provide a channel name, to seperate the events, otherwise you get the universal channel.
+you get a channel object, where you can use the publish/subscribe, request/reply and the command/comply pattern. You can provide a channel name, to seperate the events, otherwise you get the universal channel.
 
 If the channel does not exist, Backbone.Radio will create it for you, so there is no need to check for existence. Just use getChannel and couple your plugins.
 
@@ -29,6 +29,8 @@ channel.on("someEvent", doSomething)
 
 channel.emit("someEvent")
 ```
+
+The well-known pattern to inform subscribers that something has happened in an event-driven way.
 
 ## Request/Reply
 
@@ -41,8 +43,17 @@ We changed the request/reply api of Backbone.Radio to always return a promise or
 
 If there are more than one plugin, which want to reply to one event, the last one registered wins and is the only one replying. 
 
+Use this to acquire a transient ressource, e.g. requesting a connection from a connection pool of your database plugin.
+
 ## Command/Comply
 
-We decided to strip out the command pattern. It's awesome in a stateful frontend app, but useless in a stateless backend, since you don't have stateful singletons, that need keep track on the state of your app.
+```javascript
+channel.comply("myCommand", function() {
+    //do some work that can be triggered from different handlers/plugins in your app
+});
 
+//trigger command execution
+channel.command("myCommand");
+```
+Use this to encapsulate business logic that should be easily accessible everywhere in your app. We use this to easily update a session in our session plugin no matter if triggered from a socket connection or a regular http request.
 
