@@ -170,7 +170,7 @@ describe("hapi intercom request/response", function () {
 
 describe("hapi intercom command/comply", function () {
 
-    it("should comply to an command", function (done) {
+    it("should comply to a command", function (done) {
         server.route({
             method: 'GET',
             path: '/1',
@@ -184,6 +184,39 @@ describe("hapi intercom command/comply", function () {
                         });
                     });
                     server.methods.intercom.getChannel("test").command("test");
+                }
+            }
+        });
+
+        server.start(function (err) {
+            server.inject({
+                method: 'GET',
+                url: '/1'
+            }, function (res) {
+
+                expect(res.result).to.be.an.object;
+                expect(res.result.success).to.equal(true);
+
+                done();
+            });
+        });
+    });
+	
+	it("comply should return a promise", function (done) {
+        server.route({
+            method: 'GET',
+            path: '/1',
+            config: {
+                handler: function (request, reply) {
+                    console.log("START");
+                    server.methods.intercom.getChannel("test").comply("test", function () {
+						return true;
+                    });
+                    server.methods.intercom.getChannel("test").command("test").then(function(suc) {
+						reply({
+                            success: suc
+                        });
+					});
                 }
             }
         });

@@ -189,9 +189,19 @@ Radio.Commands = {
         if (commands && (commands[name] || commands['default'])) {
             var handler = commands[name] || commands['default'];
             args = commands[name] ? args : arguments;
-            Radio._callHandler(handler.callback, handler.context, args);
+            var res = Radio._callHandler(handler.callback, handler.context, args);
+			
+			if (res instanceof Promise) {
+                return res;
+            } else if (typeof res == undefined) {
+                return Promise.reject(new Error("You need to return a Promise or a Result"));
+            } else {
+                return Promise.resolve(res);
+            }
         } else {
             Radio.debugLog('An unhandled command was fired', name, channelName);
+			
+			return Promise.reject(new Error("Command " + name + " on channel " + channelName + " not found"));
         }
 
         return this;
@@ -287,7 +297,7 @@ Radio.Requests = {
             if (res instanceof Promise) {
                 return res;
             } else if (typeof res == undefined) {
-                throw ("You need to return a Promise or a Result");
+                return Promise.reject(new Error("You need to return a Promise or a Result"));
             } else {
                 return Promise.resolve(res);
             }
