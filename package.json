@@ -37,6 +37,6 @@
         "gulp-mocha": "^2.0.0",
         "gulp-plumber": "^1.0.0",
         "gulp-util": "^3.0.4",
-        "hapi": "^8.4.0"
+        "hapi": ">=8.4.0"
     }
 }
